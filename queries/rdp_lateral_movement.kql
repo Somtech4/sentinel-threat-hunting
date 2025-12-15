@@ -1,0 +1,8 @@
+// T1021.001 - Remote Desktop Protocol
+// Track RDP sessions between domain machines (Logon Type 10)
+SecurityEvent
+| where EventID == 4624
+| where LogonType == 10
+| summarize Sessions = count() by Account, Computer, WorkstationName
+| where Sessions > 3
+| project TimeGenerated, Account, Computer, WorkstationName, Sessions
