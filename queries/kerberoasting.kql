@@ -1,0 +1,7 @@
+// T1558.003 - Kerberoasting
+// High volume of service ticket requests (Event ID 4769)
+SecurityEvent
+| where EventID == 4769
+| summarize Requests = count() by RequestingAccount, ServiceName
+| where Requests > 50
+| project TimeGenerated, RequestingAccount, ServiceName, Requests
