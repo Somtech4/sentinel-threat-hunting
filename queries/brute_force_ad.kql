@@ -1,0 +1,9 @@
+// T1110 - Brute Force
+// Detect repeated failed logons to domain accounts (Event ID 4625)
+SecurityEvent
+| where TimeGenerated > ago(1h)
+| where EventID == 4625
+| where AccountType == "User"
+| summarize FailedAttempts = count() by Account, Computer, IpAddress
+| where FailedAttempts > 15
+| order by FailedAttempts desc
