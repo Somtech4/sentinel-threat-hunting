@@ -1,0 +1,7 @@
+// T1059.001 - PowerShell
+// Detect encoded or suspicious PowerShell commands
+SecurityEvent
+| where EventID == 4688
+| where ProcessName endswith "powershell.exe"
+| where CommandLine contains "-enc" or CommandLine contains "IEX" or CommandLine contains "Download"
+| project TimeGenerated, Computer, Account, CommandLine
