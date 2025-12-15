@@ -1,0 +1,12 @@
+// T1078 - Valid Accounts
+// Flag successful AD logons from distant locations in short time
+SigninLogs
+| where ResultType == 0
+| where AppDisplayName contains "Windows" or AppDisplayName contains "Active Directory"
+| sort by UserPrincipalName, TimeGenerated
+| serialize
+| extend PrevLocation = prev(Location), PrevTime = prev(TimeGenerated)
+| where UserPrincipalName == prev(UserPrincipalName)
+| extend TimeDiff = datetime_diff('minute', TimeGenerated, PrevTime)
+| where TimeDiff < 60 and Location != PrevLocation
+| project TimeGenerated, UserPrincipalName, IPAddress, Location, PrevLocation, TimeDiff
