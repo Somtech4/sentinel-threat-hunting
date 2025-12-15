@@ -1,0 +1,10 @@
+// T1550.002 - Pass the Hash
+// Network logons with NTLM (no password change)
+SecurityEvent
+| where EventID == 4624
+| where LogonType == 3
+| where AuthenticationPackage == "NTLM"
+| where not(Account contains "$")
+| summarize Logons = count() by Account, WorkstationName
+| where Logons > 10
+| project TimeGenerated, Account, WorkstationName, Logons
