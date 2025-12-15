@@ -1,0 +1,6 @@
+// T1078.004 - Domain Accounts
+// Additions to privileged groups
+SecurityEvent
+| where EventID == 4732
+| where MemberName contains "Domain Admins" or MemberName contains "Enterprise Admins"
+| project TimeGenerated, Computer, Account, MemberName
