@@ -1,0 +1,7 @@
+// T1003.006 - DCSync
+// Replication requests from non-DC machines
+SecurityEvent
+| where EventID == 4662
+| where Properties contains "DS-Replication-Get-Changes-All"
+| where not(Computer contains "DC")
+| project TimeGenerated, Computer, Account, ObjectName
