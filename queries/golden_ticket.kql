@@ -1,0 +1,9 @@
+// T1558.001 - Golden Ticket
+// Unusual Kerberos TGT requests with AES256
+SecurityEvent
+| where EventID == 4768
+| where TicketOptions == "0x40810000"
+| where TicketEncryptionType == "0x17"
+| summarize TGTs = count() by RequestingAccount
+| where TGTs > 20
+| project TimeGenerated, RequestingAccount, TGTs
