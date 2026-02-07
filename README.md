@@ -1,15 +1,33 @@
-# Microsoft Sentinel Threat Hunting & Identity Governance
+# 🔐 Microsoft Sentinel Threat Hunting & Identity-Centric Detection Engineering
 
-Practical threat hunting queries and identity governance controls for Microsoft Sentinel,
-designed for real-world SOC environments.
+Overview
 
-This repository focuses on **detection quality, analyst workflow, and risk reduction** —
-not just alert generation.
+This repository documents the design and validation of identity-focused threat detection and governance controls using:
+Microsoft Sentinel
+Microsoft Entra ID
+Microsoft Defender
+The objective was not to generate alerts, but to examine how detection quality, identity governance, and analyst workflow interact in a real-world SOC environment.
+Security operations function as a system.
+Detection logic, identity privilege design, and governance cadence collectively shape attacker success long before an incident is declared.
+This project explores that system how identity hygiene and detection engineering reinforce each other to improve signal confidence and reduce operational noise.
 
-I treat security operations as a system:
-detections, identity controls, and governance decisions all shape attacker success
-*before* an alert ever fires.
 
+## 🎯 Engineering Focus
+This repository emphasises:
+Signal quality over alert volume
+High-fidelity identity detections mapped to MITRE ATT&CK
+Governance controls that reduce blast radius before detection
+SOC-aware trade-offs (precision vs fatigue, automation vs judgment)
+All queries are designed to run within Microsoft Sentinel’s Hunting blade and can be operationalised into analytics rules.
+
+## 🧠 Detection Philosophy
+A detection that fires is not automatically useful.
+A log that exists is not automatically intelligence.
+Each query in this repository is intentionally:
+Tuned to minimise false positives
+Focused on high-impact attacker behaviour
+Structured to be explainable to analysts and auditors
+Designed with escalation clarity in mind
 
 ## What This Repository Covers
 
@@ -37,7 +55,7 @@ You reduce blast radius.
 - privilege_escalation.kql — T1078.004 Domain Accounts abuse
 - anomalous_admin_logons.kql — T1078 Valid Accounts (off-hours)
 
-## MITRE ATT&CK Mapping
+## 📂 Threat Hunting Queries (MITRE ATT&CK Mapping)
 
 | Query                        | Technique ID          | Tactic                  |
 |------------------------------|-----------------------|-------------------------|
@@ -59,7 +77,7 @@ Each query is designed to:
 
 
 
-## Identity Governance & Privileged Access Reviews (Lab 2)
+## 🏛 Identity Governance & Privileged Access Reviews (Lab 2)
 
 ### Why Identity Governance Lives in a Sentinel Repo
 
@@ -114,14 +132,8 @@ Example synergy:
 4. Paste from queries/ folder
 5. Run and bookmark
 
-## Who This Is For
 
-- SOC Analysts who want **better signal**
-- Detection Engineers focused on **quality over quantity**
-- Security Engineers designing **cloud-native SOCs**
-- Teams preparing for **audit, governance, or incident response maturity**
-
-## Evidence & Screenshots
+## 📊 Evidence & Screenshots
 
 This repository includes visual evidence from a live Microsoft Sentinel
 and Entra ID lab environment.
@@ -134,10 +146,21 @@ Screenshots are provided to demonstrate:
 
 All screenshots are located in the `screenshots/` directory.
 
+
+## 👥 Intended Audience
+SOC Analysts seeking higher-fidelity signal
+Detection Engineers optimising alert quality
+Cloud Security Engineers designing identity-centric monitoring
+Teams preparing for governance audits or SOC maturity uplift
+
+## 🚀 Future Expansion
+Automating identity anomaly scoring
+Expanding governance-to-detection correlation
+Converting high-fidelity hunts into production analytics rules
+Integrating Defender XDR investigation workflows
+
 ## License
 
 MIT License
 
-You hunt threats.
-
-You protect domains.
+Security engineering is the disciplined design of systems that reduce uncertainty under operational constraints.
